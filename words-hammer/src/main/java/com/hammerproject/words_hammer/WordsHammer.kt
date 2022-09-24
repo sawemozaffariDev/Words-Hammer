@@ -12,7 +12,7 @@ class WordsHammer {
      *         Samir
      * */
     /* bug in on ore 2 word*/
-    fun generateMultiLineWords(text: String): String {
+    fun getMultiLine(text: String): String {
         val separated = separatedWord(text)                   /*Full | Name | Is | Samir*/
         var separatedSize = separated.size
         if (separatedSize == 0 || separatedSize == 1) {
@@ -34,7 +34,7 @@ class WordsHammer {
      * @Result FullNameIs
      *         Samir
      * **/
-    fun generateMultiLineWordsWithTheLimitOfTheNumberOfCharactersPerLine(
+    fun getLimitedMultiLine(
         text: String,
         charactersPerLineCount: Int
     ): String {
@@ -70,7 +70,7 @@ class WordsHammer {
 
 
     /* necessary methods      ................................................................... */
-    fun separatedWord(text: String): MutableList<String> {
+    private fun separatedWord(text: String): MutableList<String> {
         if (text.isEmpty())
             return mutableListOf()
         val separated: MutableList<String> =
@@ -80,12 +80,12 @@ class WordsHammer {
         return separated
     }
 
-    fun isSpacialWord(baseText: String, spacialWords: ArrayList<String>): Boolean {
+    private fun isSpacialWord(baseText: String, spacialWords: ArrayList<String>): Boolean {
         val isWord = spacialWords.find { baseText.contains(it) }
         return (isWord != null && isWord.isNotEmpty() && isWord.isNotBlank())
     }
 
-    fun findSpacialWord(baseText: String, spacialWords: ArrayList<String>): String {
+    private fun findSpacialWord(baseText: String, spacialWords: ArrayList<String>): String {
         val spacialWord = spacialWords.find { baseText.contains(it) }
         return if (spacialWord != null && spacialWord.isNotEmpty() && spacialWord.isNotBlank())
             spacialWord

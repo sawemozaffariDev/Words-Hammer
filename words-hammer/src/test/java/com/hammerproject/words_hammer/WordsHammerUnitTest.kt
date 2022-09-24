@@ -21,6 +21,12 @@ class WordsHammerUnitTest {
         var expected = wordsHammerTestMethods.runTestCaseGenerateMultiLineWords();
         Assert.assertTrue(expected)
     }
+
+    @Test
+    fun split_words_in_multi_line_with_list() {
+        var expected = wordsHammerTestMethods.testGroupOfGetMultiLine();
+        Assert.assertTrue(expected)
+    }
     /* .......................................................................................... */
 
 

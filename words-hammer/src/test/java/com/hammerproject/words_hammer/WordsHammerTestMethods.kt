@@ -16,17 +16,30 @@ class WordsHammerTestMethods {
      *         Samir
      * */
     fun runTestCaseGenerateMultiLineWords(): Boolean {
-        var result = breakWords.generateMultiLineWords("FullNameIsSamir")
+        var result = breakWords.getMultiLine("FullNameIsSamir")
         return result.compareTo("Full\nName\nIs\nSamir") == 0
     }
 
     fun runTestCaseGenerateMultiLineWords(text: String, returnValue: String): Boolean {
-        var result = breakWords.generateMultiLineWords(text)
+        var result = breakWords.getMultiLine(text)
         val isEqual = result.compareTo(returnValue) == 0
         return isEqual
     }
 
-    /*  base texts list*/
+    fun testGroupOfGetMultiLine(): Boolean {
+        var expected = true;
+        for (index in listOfInputTextMultiLineWords.indices) {
+            var itsOk = runTestCaseGenerateMultiLineWords(
+                listOfInputTextMultiLineWords[index],
+                expectedResultMultiLineWords[index]
+            )
+            if (!itsOk)
+                expected = false
+        }
+        return expected
+    }
+
+    /** base texts list*/
     val listOfInputTextMultiLineWords = ArrayList(
         listOf(
             "FullNameIsSamir",
@@ -35,10 +48,13 @@ class WordsHammerTestMethods {
             "SearchByIMEI",
             "GetIPDR",
             "getIPPull",
-            "IVR"
+            "IVR",
+            "test",
+            "testcase"
         )
     )
 
+    /** result texts list*/
     val expectedResultMultiLineWords = ArrayList(
         listOf(
             "Full\nName\nIs\nSamir",
@@ -47,7 +63,9 @@ class WordsHammerTestMethods {
             "Search\nBy\nI\nM\nE\nI",
             "Get\nI\nP\nD\nR",
             "get\nI\nP\nPull",
-            "I\nV\n\nR"
+            "I\nV\nR",
+            "test",
+            "testcase"
         )
     )
     /* .......................................................................................... */
@@ -60,7 +78,7 @@ class WordsHammerTestMethods {
      *         Samir
      * **/
     fun runTestCaseGenerateMultiLineWordsWithTheLimitOfTheNumberOfCharactersPerLine(): Boolean {
-        var result = breakWords.generateMultiLineWordsWithTheLimitOfTheNumberOfCharactersPerLine(
+        var result = breakWords.getLimitedMultiLine(
             "FullNameIsSamir",
             10
         )
@@ -72,7 +90,7 @@ class WordsHammerTestMethods {
         charactersPerLineCount: Int,
         returnValue: String
     ): Boolean {
-        var result = breakWords.generateMultiLineWordsWithTheLimitOfTheNumberOfCharactersPerLine(
+        var result = breakWords.getLimitedMultiLine(
             text,
             charactersPerLineCount
         )
